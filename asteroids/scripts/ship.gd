@@ -32,7 +32,11 @@ func _process(delta):
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		get_parent().remove_child(self)
+		var obj = collision.get_collider()
+		if obj.collision_layer == 4:
+			get_parent().game_over()
+#			get_parent().remove_child(self)
+			queue_free()
 
 func move_binds():
 	if Input.is_action_pressed("rotate_left"):
@@ -50,6 +54,3 @@ func move_binds():
 		new_bullet.position = $Gun.global_position
 		get_parent().add_child(new_bullet)
 		$Timer.start(bullet_cd)
-		
-func game_over():
-	get_parent().remove_child(self)

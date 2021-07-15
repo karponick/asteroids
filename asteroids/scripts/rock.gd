@@ -31,7 +31,8 @@ func check_bounds():
 	var ly = position.y < -bounds
 	var hy = position.y > ss.y + bounds
 	if lx or hx or ly or hy:
-		get_parent().remove_child(self)
+#		get_parent().remove_child(self)
+		queue_free()
 
 func set_scale(scl):
 	scale = Vector2(scl, scl)
@@ -61,4 +62,5 @@ func get_velocity():
 func split():
 	if base:
 		get_parent().rock_split(position, rotation_degrees)
-	get_parent().remove_child(self)
+#	get_parent().remove_child(self)
+	queue_free()

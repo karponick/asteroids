@@ -8,7 +8,7 @@ var score = 0
 func _ready():
 	var Player = ship.instance()
 	self.add_child(Player)
-	$UI/Label.text = str(score)
+	$CanvasLayer/UI/Label.text = str(score)
 
 func _on_Timer_timeout():
 	var new_rock = rock.instance()
@@ -17,7 +17,14 @@ func _on_Timer_timeout():
 
 func add_point():
 	score += 1
-	$UI/Label.text = str(score)
+	$CanvasLayer/UI/Label.text = str(score)
+
+func game_over():
+	$CanvasLayer/game_over_image.visible = true
+	$CanvasLayer.set_playing_false()
+	$CanvasLayer/UI.visible = false
+	$CanvasLayer/Label.text = "Score: " + str(score)
+	$CanvasLayer/Label.visible = true
 	
 func rock_split(pos, rot):
 	var rot_dev = 20

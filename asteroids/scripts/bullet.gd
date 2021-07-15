@@ -15,12 +15,11 @@ func _process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var obj = collision.get_collider()
-		if obj.collision_layer == 1:
-			obj.game_over()
-		elif obj.collision_layer == 4:
+		if obj.collision_layer == 4:
 			obj.split()
 			get_parent().add_point()
-		get_parent().remove_child(self)
+#		get_parent().remove_child(self)
+		queue_free()
 	
 func set_velocity(ship_rotation):
 	velocity = Vector2(cos(ship_rotation), sin(ship_rotation)) * speed
@@ -28,4 +27,5 @@ func set_velocity(ship_rotation):
 
 func check_bounds():
 	if position.x < 0 or position.x > ss.x or position.y < 0 or position.y > ss.y:
-		get_parent().remove_child(self)
+#		get_parent().remove_child(self)
+		queue_free()
